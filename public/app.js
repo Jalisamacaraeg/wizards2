@@ -1,14 +1,6 @@
 const express = require("express");
 const app = express();
 
-app.get("/", (req, res) => res.send("Hello World!"));
-
-const PORT = 1337;
-
-app.listen(PORT, () => {
-  console.log(`App listening in port ${PORT}`);
-});
-
 
 const morgan = require('morgan')
 const postBank = require('./postBank')
@@ -40,7 +32,8 @@ app.get('/', (req, res, next) => {
       ${posts.map(post => `
         <div class='news-item'>
           <p>
-            <span class="news-position">${post.id}. ▲</span>${post.title}
+            <span class="news-position">${post.id}. ▲</span>
+            <a href="/posts/${post.id}">${post.title}</a>
             <small>(by ${post.name})</small>
           </p>
           <small class="news-info">
@@ -114,6 +107,7 @@ app.get('/posts/:id', (req, res) => {
   res.send(/* The HTML document string here */);
 });
 
+const PORT = process.env.PORT || 1337
 
 
 
